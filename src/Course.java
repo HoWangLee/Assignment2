@@ -6,38 +6,34 @@ import java.util.List;
 import java.util.Scanner;
 
 public class Course {
+    private static List<String> firstRow = new ArrayList<String>();
     private static List<String> header = new ArrayList<String>();
-    private static List<String> finalHeader = new ArrayList<String>();
     private static List<Double> weights = new ArrayList<Double>();
 
-    public void createHeader(File file) throws FileNotFoundException { // Read first row of file
+    public void readFirstRow(File file, List<String> firstRow) throws FileNotFoundException { // Read first row of file
         Scanner topRow = new Scanner(file);
-        header = Arrays.asList(topRow.nextLine().split(","));
+        firstRow = Arrays.asList(topRow.nextLine().split(","));
         topRow.close();
+        this.firstRow = firstRow;
+    }
+
+    public void setHeader(List<String> firstRow, List<String> header){ // Exclude weights in final header
+        header.add(0,"ID");
+        header.add(1, "Name");
+        for(int firstRowCol = 2, headerCol = 2; firstRowCol < firstRow.size(); firstRowCol += 2, headerCol++)
+            header.add(headerCol, firstRow.get(firstRowCol));
+        header.add("Overall");
         this.header = header;
     }
-    public void setHeader(List<String> header){this.header = header}
-    public List<String> getHeader() {return header;}
 
-    public void setFinalHeader(List<String> getHeader){ // Exclude weights in final header
-        finalHeader.add(0,"ID");
-        finalHeader.add(1, "Name");
-        for(int headerCol = 2, finalHeaderCol = 2; headerCol < header.size(); headerCol += 2, finalHeaderCol++){
-            finalHeader.add(finalHeaderCol, header.get(headerCol));
-        }
-        finalHeader.add("Overall");
-        this.finalHeader = finalHeader;
-    }
-    public List<String> getFinalHeader(){return finalHeader;}
-
-    public void setWeights(List<Double> getHeader) { // Store weights of different tests and assignments
-        for(int weightsCol = 0, headerCol = 3; headerCol < header.size(); weightsCol++, headerCol += 2)
-            weights.add(weightsCol, Double.parseDouble(header.get(headerCol)));
+    public void setWeights(List<String> firstRow, List<Double> weights) { // Store weights of different tests and assignments
+        for(int weightsCol = 0, firstRowCol = 3; firstRowCol < firstRow.size(); weightsCol++, firstRowCol += 2)
+            weights.add(weightsCol, Double.parseDouble(firstRow.get(firstRowCol)));
         this.weights = weights;
     }
 
-    public List<Double> getWeights() {return weights;}
-
+    public static List<String> getHeader() {return header;}
+    public static List<Double> getWeights() {return weights;}
 
 
 }

@@ -29,6 +29,8 @@ public class Driver {
 
         Student.setListOfStudentInfo(file); // read File object into List
         System.out.println(Student.getListOfStudentInfo());
+
+
 /**
         List<List<String>> listOfStudentInfo = new ArrayList<List<String>>();
         final Scanner infoReader = new Scanner(file);
