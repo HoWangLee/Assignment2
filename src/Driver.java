@@ -28,7 +28,10 @@ public class Driver {
         File file = new File(filePath); // define File object
 
         Student.setListOfStudentInfo(file); // read File object into List
-        System.out.println(Student.getListOfStudentInfo());
+        Course.setFirstRowFirstRow(file); // read first row of file object into List
+        Course.setHeader(Course.getFirstRow()); // set header
+        Display.widthAutomator(Student.getListOfStudentInfo()); // set max width
+        Display.printing(Course.getHeader(), Student.getListOfStudentInfo()); // print list
 
 
 /**
