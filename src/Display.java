@@ -1,3 +1,4 @@
+import java.text.DecimalFormat;
 import java.util.List;
 /**
  * Created by Howard on 23/1/2017.
@@ -16,7 +17,7 @@ public class Display {
                 if (listOfLists.get(row).get(col).length() > maxLength) maxLength = listOfLists.get(row).get(col).length();
     }
 
-    public static void printing(List<String> header, List<List<String>> listOfLists) {
+    public static void printing(List<String> header, List<List<String>> listOfLists, List<String> average) {
         String format = "%-" + (maxLength + 2) + "s";
         for (int col = 0; col < header.size(); col++) { // print header
             header.set(col, header.get(col).trim());
@@ -30,5 +31,11 @@ public class Display {
             }
             System.out.printf("\n");
         }
+        for (int col = 0; col < average.size(); col++){ // print average
+            average.set(col, average.get(col).trim());
+            System.out.printf(format, average.get(col));
+        }
     }
+    public static DecimalFormat df = new DecimalFormat("#0.00");
+
 }
